@@ -1,32 +1,30 @@
-# Prerequisites
-*.d
+# Python
+*.py[cod]
+__pycache__/
+*$py.class
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Entornos virtuales
+env/
+venv/
 
-# Precompiled Headers
-*.gch
-*.pch
+# Archivos de dependencias
+*.egg-info/
+dist/
+build/
+*.wheel
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# Archivos sensibles
+.env
 
-# Fortran module files
-*.mod
-*.smod
+# Logs y debugging
+*.log
+*.bak
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+# Configuración del editor
+.idea/
+.vscode/
+*.swp
+*.swo
 
-# Executables
-*.exe
-*.out
-*.app
+# Documentación generada
+docs/_build/
