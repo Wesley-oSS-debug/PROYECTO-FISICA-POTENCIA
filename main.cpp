@@ -1,11 +1,12 @@
 #include <iostream>
-
+#include "funciones.h"
 using namespace std;
 
 int main() {
 	int op;
 	
 	do {
+		system("cls");
 		cout<<"---------MENU PRINCIPAL---------"<<endl
 			<<"1. Calcular Trabajo de una fuerza constante"<<endl
 			<<"2. Calcular Trabajo de una fuerza variable"<<endl
@@ -15,6 +16,7 @@ int main() {
 			<<"Ingrese una opcion: "; cin>>op;
 		switch (op) {
 			case 1:
+				TrabajoFuerzaConst();
 				break;
 			case 2:
 				break;
