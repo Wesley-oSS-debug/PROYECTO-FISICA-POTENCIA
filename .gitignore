@@ -1,30 +1,5 @@
-# Python
-*.py[cod]
-__pycache__/
-*$py.class
+*.exe
+*.win
+*.o
+*.layout
 
-# Entornos virtuales
-env/
-venv/
-
-# Archivos de dependencias
-*.egg-info/
-dist/
-build/
-*.wheel
-
-# Archivos sensibles
-.env
-
-# Logs y debugging
-*.log
-*.bak
-
-# Configuración del editor
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# Documentación generada
-docs/_build/
