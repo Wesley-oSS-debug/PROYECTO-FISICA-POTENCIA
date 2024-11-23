@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void TrabajoFuerzaConst(ofstream &archivo,int &n) {
+void TrabajoFuerzaConst(ofstream &archivo) {
 	
 	float fuerza,distancia,angulo,trabajo;
 	system("cls");
@@ -17,7 +17,6 @@ void TrabajoFuerzaConst(ofstream &archivo,int &n) {
 	trabajo=fuerza*cos(angulo)*distancia;
 	cout<<"El trabajo consumido por la fuerza es de "<<trabajo<<" Joules"<<endl;
 	archivo<<fuerza<<" "<<angulo<<" "<<distancia<<" "<<trabajo<<endl;
-	n++;
 	system("pause");
 	
 }
