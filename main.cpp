@@ -5,11 +5,17 @@ using namespace std;
 
 int main() {
 	int op;
-	int n=0;
+	string linea;
 	ofstream archivo;
 	ifstream archivo2;
-	archivo.open("salida.txt");
+	archivo.open("salida.txt",ios::app); //ios::app para seguir escribiendo
 	do {
+		int n=0;
+		archivo2.open("Salida.txt");
+		while (getline(archivo2,linea)) {
+			n++;
+		}
+	archivo2.close();
 		system("cls");
 		cout<<"---------MENU PRINCIPAL---------"<<endl
 			<<"1. Calcular Trabajo de una fuerza constante"<<endl
@@ -21,7 +27,7 @@ int main() {
 			<<"Ingrese una opcion: "; cin>>op;
 		switch (op) {
 			case 1:
-				TrabajoFuerzaConst(archivo,n);
+				TrabajoFuerzaConst(archivo);
 				break;
 			case 2:
 				break;
