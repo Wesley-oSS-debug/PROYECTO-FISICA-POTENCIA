@@ -8,10 +8,10 @@ int main() {
 	string linea;
 	ofstream archivo;
 	ifstream archivo2;
-	archivo.open("salida.txt",ios::app); //ios::app para seguir escribiendo
+	archivo.open("TFConst.txt",ios::app); //ios::app para seguir escribiendo
 	do {
 		int n=0;
-		archivo2.open("Salida.txt");
+		archivo2.open("TFConst.txt");
 		while (getline(archivo2,linea)) {
 			n++;
 		}
@@ -36,7 +36,7 @@ int main() {
 			case 4:
 				break;
 			case 5:
-				archivo2.open("salida.txt");
+				archivo2.open("TFConst.txt");
 				mostrarDatos(archivo2,n);
 				archivo2.close();
 				break;
