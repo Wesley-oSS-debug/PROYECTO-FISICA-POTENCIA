@@ -22,7 +22,7 @@ int main() {
 			<<"2. Calcular Trabajo de una fuerza variable"<<endl
 			<<"3. Calcular Trabajo consumido por un resorte"<<endl
 			<<"4. Calcular Potencia"<<endl
-			<<"5. Mostrar datos"<<endl
+			<<"5. Mostrar datos de trabajo de fuerza constante"<<endl
 			<<"0. Salir del programa"<<endl
 			<<"Ingrese una opcion: "; cin>>op;
 		switch (op) {
