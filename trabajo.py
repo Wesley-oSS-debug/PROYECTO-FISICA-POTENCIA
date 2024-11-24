@@ -6,7 +6,7 @@ raiz=Tk()
 
 raiz.iconbitmap("work.ico")
 raiz.title("TRABAJO")
-raiz.geometry("800x800")
+raiz.geometry("800x800+500+100")
 raiz.resizable("False","False")
 raiz.config(bg="#ffecbd")
 mainImage=PhotoImage(file="trabajo.png")
@@ -22,7 +22,7 @@ def salir():
 def trabajoC():
     vTF=Tk()
     vTF.title("Fuerza constante")
-    vTF.geometry("400x300")
+    vTF.geometry("400x300+700+400")
     
     #FUNCION QUE CALCULA EL TRABAJO DE UNA FUERZA CONSTANTE
     def calculo():
