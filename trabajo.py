@@ -1,50 +1,77 @@
-import webbrowser  
+from tkinter import *
+from tkinter import messagebox
+import math
 
-def opcion1():
-    # El enlace de Google Docs que quieres abrir
-    url = "https://docs.google.com/document/d/1kW4qjYgFTEPtui10ZwKWFCUTTVd68vTgg5oGKePvCjY/edit?hl=es&tab=t.0"
+raiz=Tk()
+
+raiz.iconbitmap("work.ico")
+raiz.title("TRABAJO")
+raiz.geometry("800x800")
+raiz.resizable("False","False")
+raiz.config(bg="#ffecbd")
+mainImage=PhotoImage(file="trabajo.png")
+imgLbl=Label(raiz,image=mainImage)
+imgLbl.grid(row=0,column=0,padx=150,pady=10)
+
+def salir():
+    valor=messagebox.askokcancel("Salir","Estas seguro que deseas salir?")
+    if valor==True:
+        raiz.destroy()
+
+#VENTANA DE LA OPCION TRABAJO CONSTANTE
+def trabajoC():
+    vTF=Tk()
+    vTF.title("Fuerza constante")
+    vTF.geometry("400x300")
     
-    try:
-        webbrowser.open(url, new=2)  # 'new=2' intenta abrir la URL en una nueva ventana del navegador
-        print(f"\nSe está abriendo la teoria...\n")
-    except Exception as e:
-        print(f"\nOcurrió un error al intentar abrir la URL\n")
+    #FUNCION QUE CALCULA EL TRABAJO DE UNA FUERZA CONSTANTE
+    def calculo():
+        f=fuerzaIn.get()
+        a=anguloIn.get()
+        aRad=math.radians(float(a))
+        d=distanciaIn.get()
+        r=float(f)*float(d)*math.cos(aRad)
+        resultadoIn.delete(0,"end")
+        resultadoIn.insert(0,r)
+        
+    fuerzaLbl=Label(vTF, text="Fuerza:")
+    fuerzaLbl.grid(row=0,column=0, sticky="e", padx=10, pady=5)
+    
+    fuerzaIn=Entry(vTF, justify="center")
+    fuerzaIn.grid(row=0,column=1)
+    
+    anguloLbl=Label(vTF, text="Angulo:")
+    anguloLbl.grid(row=1,column=0, sticky="e", padx=10, pady=5)
+    
+    anguloIn=Entry(vTF,justify="center")
+    anguloIn.grid(row=1,column=1)
+    
+    distanciaLbl=Label(vTF, text="Distancia:")
+    distanciaLbl.grid(row=2,column=0, sticky="e", padx=10,pady=5)
+    
+    distanciaIn=Entry(vTF,justify="center")
+    distanciaIn.grid(row=2,column=1)
+    
+    btn=Button(vTF, text="Calcular", command=calculo)
+    btn.grid(row=1,column=2, padx=10)
+    
+    resultadoLbl=Label(vTF,text="Resultado:")
+    resultadoLbl.grid(row=3,column=0, padx=10, pady=5)
+    
+    resultadoIn=Entry(vTF, bg="yellow",justify="center")
+    resultadoIn.grid(row=3,column=1)
 
-def opcion2():
-    print("\nAqui se calcula el trabajo...\n")
+#BOTONES
+btn1=Button(raiz, text="Teoria de TRABAJO")
+btn1.grid(row=1,column=0,pady=10)
 
-def opcion3():
-    print("\nAqui se calcula el trabajo consumido por un resorte...\n")
+btn2=Button(raiz, text="Calcular Trabajo de una fuerza constante", command=trabajoC)
+btn2.grid(row=2,column=0,pady=10)
 
-def opcionSalir():
-    print("Saliendo del programa...")
-    return True  
+btn3=Button(raiz, text="Calcular Trabajo de una fuerza variable")
+btn3.grid(row=3,column=0,pady=10)
 
-def opcionInvalida():
-    print("Opcion invalida.\n")
-    return False  
+btn0=Button(raiz, text="Salir del programa", fg="red", command=salir)
+btn0.grid(row=4,column=0)
 
-# Diccionario que es parecido al switch
-switch = {
-    1: opcion1,
-    2: opcion2,
-    3: opcion3,
-    0: opcionSalir  
-}
-
-def evaluarOpcion(opcion):
-    return switch.get(opcion, opcionInvalida)()  
-
-while True:
-    try:
-        print(f"TRABAJO\n"
-              f"1. Teoria\n"
-              f"2. Calculo de Trabajo\n"
-              f"3. Trabajo consumido por un resorte\n"
-              f"0. Salir\n")
-        opcion = int(input("Digite una opción: "))
-
-        if evaluarOpcion(opcion):  
-            break
-    except ValueError:
-        print("Por favor, ingresa un número válido.")
+raiz.mainloop()
