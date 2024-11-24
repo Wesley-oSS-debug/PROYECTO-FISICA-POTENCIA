@@ -31,8 +31,10 @@ def trabajoC():
         aRad=math.radians(float(a))
         d=distanciaIn.get()
         r=float(f)*float(d)*math.cos(aRad)
+        resultadoIn.config(state="normal")
         resultadoIn.delete(0,"end")
         resultadoIn.insert(0,r)
+        resultadoIn.config(state="readonly")
         
     fuerzaLbl=Label(vTF, text="Fuerza:")
     fuerzaLbl.grid(row=0,column=0, sticky="e", padx=10, pady=5)
@@ -58,7 +60,7 @@ def trabajoC():
     resultadoLbl=Label(vTF,text="Resultado:")
     resultadoLbl.grid(row=3,column=0, padx=10, pady=5)
     
-    resultadoIn=Entry(vTF, bg="yellow",justify="center")
+    resultadoIn=Entry(vTF, readonlybackground="yellow",state="readonly",justify="center")
     resultadoIn.grid(row=3,column=1)
 
 #BOTONES
