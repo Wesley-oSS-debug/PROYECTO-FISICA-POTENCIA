@@ -2,8 +2,8 @@ from tkinter import *
 from tkinter import messagebox
 import math
 
+#CONFIGURACIONES VENTANA PRINCIPAL
 raiz=Tk()
-
 raiz.iconbitmap("work.ico")
 raiz.title("TRABAJO")
 raiz.geometry("800x800+500+100")
@@ -22,8 +22,14 @@ def salir():
 def trabajoC():
     vTF=Tk()
     vTF.title("Fuerza constante")
-    vTF.geometry("400x300+700+400")
+    vTF.geometry("300x200+750+400")
     
+    fuerza=[]
+    angulo=[]
+    distancia=[]
+    trabajo=[]
+    datos=[fuerza,angulo,distancia,trabajo]
+    Dactual=0 #datos actualmente
     #FUNCION QUE CALCULA EL TRABAJO DE UNA FUERZA CONSTANTE
     def calculo():
         f=fuerzaIn.get()
@@ -31,11 +37,62 @@ def trabajoC():
         aRad=math.radians(float(a))
         d=distanciaIn.get()
         r=float(f)*float(d)*math.cos(aRad)
+        
+        datos[0].append(f)
+        datos[1].append(a)
+        datos[2].append(d)
+        datos[3].append(r)
+        
+        nonlocal Dactual
+        Dactual+=1
+        
         resultadoIn.config(state="normal")
         resultadoIn.delete(0,"end")
         resultadoIn.insert(0,r)
         resultadoIn.config(state="readonly")
         
+    def mostrarDatos():
+        vDat=Tk()
+        vDat.title("Datos")
+        vDat.geometry("550x400+100+300")
+        
+        #Labels
+        fLbl=Label(vDat, text="Fuerza", bg="yellow", width=14, height=1)
+        fLbl.grid(row=0,column=0, padx=10, pady=5)
+        
+        aLbl=Label(vDat, text="Angulo",bg="yellow", width=14, height=1)
+        aLbl.grid(row=0,column=1, padx=10, pady=5)
+        
+        dLbl=Label(vDat, text="Distancia",bg="yellow", width=14, height=1)
+        dLbl.grid(row=0,column=2, padx=10,pady=5)
+        
+        tLbl=Label(vDat,text="Trabajo",bg="yellow", width=14, height=1)
+        tLbl.grid(row=0,column=3, padx=10, pady=5)
+        
+        #Entrys
+        
+        for i in range(Dactual):
+            fIn=Entry(vDat, justify="center")
+            fIn.grid(row=i+1,column=0,padx=10)
+            fIn.insert(0,datos[0][i])
+            fIn.config(state="readonly")
+            
+            aIn=Entry(vDat,justify="center")
+            aIn.grid(row=i+1,column=1)
+            aIn.insert(0,datos[1][i])
+            aIn.config(state="readonly")
+            
+            dIn=Entry(vDat,justify="center")
+            dIn.grid(row=i+1,column=2, padx=10)
+            dIn.insert(0,datos[2][i])
+            dIn.config(state="readonly")
+            
+            tIn=Entry(vDat,justify="center")
+            tIn.grid(row=i+1,column=3)
+            tIn.insert(0,datos[3][i])
+            tIn.config(state="readonly")
+
+    #LABEL,ENTRY Y BOTONES
     fuerzaLbl=Label(vTF, text="Fuerza:")
     fuerzaLbl.grid(row=0,column=0, sticky="e", padx=10, pady=5)
     
@@ -62,6 +119,9 @@ def trabajoC():
     
     resultadoIn=Entry(vTF, readonlybackground="yellow",state="readonly",justify="center")
     resultadoIn.grid(row=3,column=1)
+    
+    mostrarBtn=Button(vTF, text="Mostrar Datos", command=mostrarDatos)
+    mostrarBtn.grid(row=4,column=1, pady=30)
 
 #BOTONES
 btn1=Button(raiz, text="Teoria de TRABAJO")
@@ -74,6 +134,6 @@ btn3=Button(raiz, text="Calcular Trabajo de una fuerza variable")
 btn3.grid(row=3,column=0,pady=10)
 
 btn0=Button(raiz, text="Salir del programa", fg="red", command=salir)
-btn0.grid(row=4,column=0)
+btn0.grid(row=4,column=0,pady=10)
 
 raiz.mainloop()
