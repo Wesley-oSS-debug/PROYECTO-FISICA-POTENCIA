@@ -62,7 +62,6 @@ def trabajoC():
     resultadoIn.grid(row=3,column=1)
 
 #BOTONES
-
 btn1=Button(raiz, text="Teoria de TRABAJO")
 btn1.grid(row=1,column=0,pady=10)
 
@@ -74,7 +73,5 @@ btn3.grid(row=3,column=0,pady=10)
 
 btn0=Button(raiz, text="Salir del programa", fg="red", command=salir)
 btn0.grid(row=4,column=0)
-
-
 
 raiz.mainloop()
