@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import math
-
+import webbrowser 
 #ARREGLOS
 
 #arreglos de trabajo fuerza constante
@@ -49,15 +49,46 @@ def teoriaTrabajo():
     frameBtn=Frame(teoria, bg="#350b4b")
     frameBtn.grid()
     
+    def verEnLinea():
+        url = "https://csmer.uprrp.edu/wp-content/uploads/Trabajo-Potencia-y-Maquinas-Simples.pdf"
+        url1 = "https://fisica.uprb.edu/cursos/FISI3173VK1/Teoria6.pdf"
+        try:
+            webbrowser.open(url, new=2) 
+            webbrowser.open(url1, new=3) 
+        except ValueError:
+            messagebox.showerror("Error", "No se pudo abrir en linea, revise su conexion a internet")
+
+    def descargarLibro():
+        urlLum = "https://drive.google.com/uc?export=download&id=1Yjke8ePblaCpMXQvqJP8tQt64fDqwjgb"    
+        try:
+            webbrowser.open(urlLum, new=2)
+        except ValueError:
+            messagebox.showerror("ERROR" , "No se pudo realizar la descarga")
+
+    def verClase():
+        urlTeoClase = "https://drive.google.com/file/d/1Te-puR3r3tkcSgz4PGKi-wGc2pjfsGcZ/view?usp=sharing"
+        try:
+            webbrowser.open(urlTeoClase, new=2)
+        except ValueError:
+            messagebox.showerror("ERROR", "No se puedo abrir el archivo, revise la conexion a internet")
+
+    def downloadTeo():
+        urlTeoClase = "https://drive.google.com/uc?export=download&id=1Te-puR3r3tkcSgz4PGKi-wGc2pjfsGcZ"
+        try:
+            webbrowser.open(urlTeoClase, new=2)
+        except ValueError:
+            messagebox.showerror("ERROR", "No se puedo abrir el archivo, revise la conexion a internet")
+
+    #MENU
     tituloTeoria = Label(frameBtn, text ="BIENVENIDO A TEORIA", bg = "#F4D03F", fg = "#ffffff", font=("Impact", 20, "bold"))
     tituloTeoria.grid(row=0,column=0,pady=25,padx=15)
-    btn1=Button(frameBtn, text="Ver teoria en linea" ,bg = "#48C9B0", fg = "#ffffff", font=("Arial", 10, "bold"))
+    btn1=Button(frameBtn, text="Ver teoria en linea" ,bg = "#48C9B0", fg = "#ffffff", font=("Arial", 10, "bold"), command = verEnLinea)
     btn1.grid(row=1,column=0,pady=10)
-    btn1=Button(frameBtn, text="Descargar teoria",bg = "#48C9B0", fg = "#ffffff", font=("Arial", 10, "bold"))
+    btn1=Button(frameBtn, text="Ver teoria en clase",bg = "#48C9B0", fg = "#ffffff", font=("Arial", 10, "bold"), command = verClase)
     btn1.grid(row=2,column=0,pady=10)
-    btn1=Button(frameBtn, text="Ver teoria de forma local",bg = "#48C9B0", fg = "#ffffff", font=("Arial", 10, "bold"))
+    btn1=Button(frameBtn, text="Descargar teoria en clase",bg = "#48C9B0", fg = "#ffffff", font=("Arial", 10, "bold"),command = downloadTeo)
     btn1.grid(row=3,column=0,pady=10)
-    btn1=Button(frameBtn, text="Ver libros",bg = "#48C9B0", fg = "#ffffff", font=("Arial", 10, "bold"))
+    btn1=Button(frameBtn, text="Descargar libro de fisica",bg = "#48C9B0", fg = "#ffffff", font=("Arial", 10, "bold"), command= descargarLibro)
     btn1.grid(row=4,column=0,pady=10)
 
 #VENTANA DE LA OPCION TRABAJO CONSTANTE
