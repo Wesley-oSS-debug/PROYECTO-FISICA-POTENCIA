@@ -10,6 +10,11 @@ angulo=[]
 distancia=[]
 trabajo=[]
 datosTFC=[fuerza,angulo,distancia,trabajo]
+#arreglos de potencia
+trabajoPotencia=[]
+tiempo=[]
+potencia=[]
+datosPot=[trabajoPotencia, tiempo, potencia]
 
 #CONFIGURACIONES VENTANA PRINCIPAL
 raiz=Tk()
@@ -152,14 +157,9 @@ def trabajoC():
     mostrarBtn.grid(row=4,column=1, pady=20)
 
 def potencia():
-    vTF=Tk()
-    vTF.title("Potencia")
-    vTF.geometry("300x200+750+400")
-
-    trabajoPotencia=[]
-    tiempo=[]
-    potencia=[]
-    datosPotencia=[trabajoPotencia, tiempo, potencia]
+    vP=Tk()
+    vP.title("Potencia")
+    vP.geometry("300x200+750+400")
 
     #FUNCION PARA CALCULAR POTENCIA
     def calculoPotencia():
@@ -167,16 +167,13 @@ def potencia():
 
             w=float(trabajoPotenciaIn.get())
             t=float(tiempoIn.get())
-
             if t < 0:
                 messagebox.showerror("Error", "El tiempo no puede ser negativo")
                 return
-
-            p=round(float(w)/float(t),4)
-
-            datosPotencia[0].append(w)
-            datosPotencia[1].append(t)
-            datosPotencia[2].append(p)
+            p=round(float(w)/float(t),2)
+            datosPot[0].append(w)
+            datosPot[1].append(t)
+            datosPot[2].append(p)
 
             resultadoPotenciaIn.config(state="normal")
             resultadoPotenciaIn.delete(0,"end")
@@ -204,46 +201,46 @@ def potencia():
         
         #Entrys
         
-        for i in range(len(datosPotencia[0])): #solo es necesario la longitud de un subarreglo
+        for i in range(len(datosPot[0])): #solo es necesario la longitud de un subarreglo
             
             fIn=Entry(vDat, justify="center")
             fIn.grid(row=i+1,column=0,padx=10)
-            fIn.insert(0,datosPotencia[0][i])
+            fIn.insert(0,datosPot[0][i])
             fIn.config(state="readonly")
 
             aIn=Entry(vDat,justify="center")
             aIn.grid(row=i+1,column=1)
-            aIn.insert(0,datosPotencia[1][i])
+            aIn.insert(0,datosPot[1][i])
             aIn.config(state="readonly")
             
             dIn=Entry(vDat,justify="center")
             dIn.grid(row=i+1,column=2, padx=10)
-            dIn.insert(0,datosPotencia[2][i])
+            dIn.insert(0,datosPot[2][i])
             dIn.config(state="readonly")
 
     #LABEL,ENTRY Y BOTONES
-    trabajoPotenciaLbl=Label(vTF, text="Trabajo:")
-    trabajoPotenciaLbl.grid(row=0,column=0, sticky="e", padx=10, pady=5)
+    trabajoPotenciaLbl=Label(vP, text="Trabajo:")
+    trabajoPotenciaLbl.grid(row=0,column=0, sticky="nsew", padx=10, pady=5)
     
-    trabajoPotenciaIn=Entry(vTF, justify="center")
+    trabajoPotenciaIn=Entry(vP, justify="center")
     trabajoPotenciaIn.grid(row=0,column=1)
     
-    tiempoLbl=Label(vTF, text="Tiempo:")
-    tiempoLbl.grid(row=1,column=0, sticky="e", padx=10, pady=5)
+    tiempoLbl=Label(vP, text="Tiempo:")
+    tiempoLbl.grid(row=1,column=0, sticky="nsew", padx=10, pady=5)
     
-    tiempoIn=Entry(vTF,justify="center")
+    tiempoIn=Entry(vP,justify="center")
     tiempoIn.grid(row=1,column=1)
     
-    btn=Button(vTF, text="Calcular", command=calculoPotencia)
+    btn=Button(vP, text="Calcular", command=calculoPotencia)
     btn.grid(row=1,column=2, padx=10)
     
-    resultadoPotenciaLbl=Label(vTF,text="Resultado:")
-    resultadoPotenciaLbl.grid(row=2,column=0, padx=10, pady=5)
+    resultadoPotenciaLbl=Label(vP,text="Resultado:")
+    resultadoPotenciaLbl.grid(row=2,column=0, padx=10, pady=5,sticky="nsew")
     
-    resultadoPotenciaIn=Entry(vTF, readonlybackground="yellow",state="readonly",justify="center")
+    resultadoPotenciaIn=Entry(vP, readonlybackground="yellow",state="readonly",justify="center")
     resultadoPotenciaIn.grid(row=2,column=1)
     
-    mostrarBtn=Button(vTF, text="Mostrar Datos", command=mostrarDatosPotencia)
+    mostrarBtn=Button(vP, text="Mostrar Datos", command=mostrarDatosPotencia)
     mostrarBtn.grid(row=3,column=1, pady=30)
 
 #BOTONES MENU PRINCIPAL
