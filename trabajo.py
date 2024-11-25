@@ -30,11 +30,34 @@ def salir():
     if valor==True:
         raiz.destroy()
 
+#VENTANA DE TEORIA DE TRABAJO
+def teoriaTrabajo():
+    teoria = Tk()
+    teoria.title("Teoria")
+    teoria.geometry("220x320+670+200")
+    teoria.resizable(0,0)
+    teoria.config(bg = "#b0c2f2")
+    frameBtn=Frame(teoria, bg="#b0c2f2")
+    frameBtn.grid()
+    
+    tituloTeoria = Label(frameBtn, text ="\n  BIENVENIDO AL APARTADO DE TEORIA  \n", bg = "#b0c2f2")
+    tituloTeoria.grid(row=0,column=0,pady=10)
+    btn1=Button(frameBtn, text="Ver teoria en linea\n" ,bg = "#6578a3", fg = "#ffffff")
+    btn1.grid(row=1,column=0,pady=10)
+    btn1=Button(frameBtn, text="Descargar teoria\n",bg = "#6578a3", fg = "#ffffff")
+    btn1.grid(row=2,column=0,pady=10)
+    btn1=Button(frameBtn, text="Ver teoria de forma local\n",bg = "#6578a3", fg = "#ffffff")
+    btn1.grid(row=3,column=0,pady=10)
+    btn1=Button(frameBtn, text="Ver libros\n",bg = "#6578a3", fg = "#ffffff")
+    btn1.grid(row=4,column=0,pady=10)
+
+
+
 #VENTANA DE LA OPCION TRABAJO CONSTANTE
 def trabajoC():
     vTF=Tk()
     vTF.title("Fuerza constante")
-    vTF.geometry("300x200+750+400")
+    vTF.geometry("300x200+750+400")     
     
     
     
@@ -145,7 +168,7 @@ def trabajoC():
 #frame de botones
 frameBtn=Frame(raiz, bg="#ffecbd")
 frameBtn.grid()
-btn1=Button(frameBtn, text="Teoria de TRABAJO")
+btn1=Button(frameBtn, text="Teoria de TRABAJO", command = teoriaTrabajo)
 btn1.grid(row=1,column=0,pady=10)
 
 btn2=Button(frameBtn, text="Calcular Trabajo de una fuerza constante", command=trabajoC)
