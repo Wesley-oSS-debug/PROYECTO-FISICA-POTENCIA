@@ -2,6 +2,15 @@ from tkinter import *
 from tkinter import messagebox
 import math
 
+#ARREGLOS
+
+#arreglos de trabajo fuerza constante
+fuerza=[]
+angulo=[]
+distancia=[]
+trabajo=[]
+datosTFC=[fuerza,angulo,distancia,trabajo]
+
 #CONFIGURACIONES VENTANA PRINCIPAL
 raiz=Tk()
 raiz.iconbitmap("work.ico")
@@ -27,11 +36,7 @@ def trabajoC():
     vTF.title("Fuerza constante")
     vTF.geometry("300x200+750+400")
     
-    fuerza=[]
-    angulo=[]
-    distancia=[]
-    trabajo=[]
-    datos=[fuerza,angulo,distancia,trabajo]
+    
     
     #FUNCION QUE CALCULA EL TRABAJO DE UNA FUERZA CONSTANTE
     def calculo():
@@ -41,10 +46,10 @@ def trabajoC():
         d=distanciaIn.get()
         r=round(float(f)*float(d)*math.cos(aRad),2) #round(numero,decimales)
         
-        datos[0].append(f)
-        datos[1].append(a)
-        datos[2].append(d)
-        datos[3].append(r)
+        datosTFC[0].append(f)
+        datosTFC[1].append(a)
+        datosTFC[2].append(d)
+        datosTFC[3].append(r)
         
         resultadoIn.config(state="normal")
         resultadoIn.delete(0,"end")
@@ -52,9 +57,9 @@ def trabajoC():
         resultadoIn.config(state="readonly")
         
     def mostrarDatos():
-        if len(datos[0])==0:
+        if len(datosTFC[0])==0:
             messagebox.showerror("ERROR","No hay datos para visualizar")
-            messagebox.config(padx=-100)
+            vTF.destroy()
             return;
         vDat=Tk()
         vDat.title("Datos")
@@ -77,30 +82,32 @@ def trabajoC():
         
         #Entrys
         
-        for i in range(len(datos[0])): #solo es necesario la longitud de un subarreglo
+        for i in range(len(datosTFC[0])): #solo es necesario la longitud de un subarreglo
             
             fIn=Entry(frameLista, justify="center")
             fIn.grid(row=i+1,column=0,padx=10)
-            fIn.insert(0,datos[0][i])
+            fIn.insert(0,datosTFC[0][i])
             fIn.config(state="readonly")
 
             aIn=Entry(frameLista,justify="center")
             aIn.grid(row=i+1,column=1)
-            aIn.insert(0,datos[1][i])
+            aIn.insert(0,datosTFC[1][i])
             aIn.config(state="readonly")
             
             dIn=Entry(frameLista,justify="center")
             dIn.grid(row=i+1,column=2, padx=10)
-            dIn.insert(0,datos[2][i])
+            dIn.insert(0,datosTFC[2][i])
             dIn.config(state="readonly")
             
             tIn=Entry(frameLista,justify="center")
             tIn.grid(row=i+1,column=3)
-            tIn.insert(0,datos[3][i])
+            tIn.insert(0,datosTFC[3][i])
             tIn.config(state="readonly")
 
-    #LABEL,ENTRY Y BOTONES
+
+
     
+    #LABEL,ENTRY Y BOTONES
     frameEnt=Frame(vTF)
     frameEnt.grid(padx=10,pady=15)
     
