@@ -15,15 +15,15 @@ datosTFC=[fuerza,angulo,distancia,trabajo]
 raiz=Tk()
 raiz.iconbitmap("work.ico")
 raiz.title("TRABAJO")
-raiz.geometry("800x800+500+100")
+raiz.geometry("400x600+750+200")
 raiz.resizable("False","False")
 raiz.config(bg="#ffecbd")
-mainImage=PhotoImage(file="trabajo.png")
+mainImage=PhotoImage(file="work.png")
 #frame de la imagen
 frameImg=Frame(raiz,bg="#ffecbd")
-frameImg.grid(row=0,column=0,pady=30)
+frameImg.grid(row=0,column=0,pady=40)
 imgLbl=Label(frameImg,image=mainImage)
-imgLbl.grid(row=0,column=0,padx=140)
+imgLbl.grid(row=0,column=0,padx=73)
 
 def salir():
     valor=messagebox.askokcancel("Salir","Estas seguro que deseas salir?")
@@ -34,7 +34,7 @@ def salir():
 def trabajoC():
     vTF=Tk()
     vTF.title("Fuerza constante")
-    vTF.geometry("300x200+750+400")
+    vTF.geometry("300x200+800+400")
     
     
     
@@ -145,6 +145,7 @@ def trabajoC():
 #frame de botones
 frameBtn=Frame(raiz, bg="#ffecbd")
 frameBtn.grid()
+
 btn1=Button(frameBtn, text="Teoria de TRABAJO")
 btn1.grid(row=1,column=0,pady=10)
 
@@ -154,7 +155,10 @@ btn2.grid(row=2,column=0,pady=10)
 btn3=Button(frameBtn, text="Calcular Trabajo de una fuerza variable")
 btn3.grid(row=3,column=0,pady=10)
 
+btn4=Button(frameBtn, text="Calcular Potencia")
+btn4.grid(row=4,column=0,pady=10)
+
 btn0=Button(frameBtn, text="Salir del programa", fg="red", command=salir)
-btn0.grid(row=4,column=0,pady=10)
+btn0.grid(row=5,column=0,pady=10)
 
 raiz.mainloop()
