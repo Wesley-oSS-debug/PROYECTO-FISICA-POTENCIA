@@ -32,21 +32,33 @@ def trabajoC():
     
     #FUNCION QUE CALCULA EL TRABAJO DE UNA FUERZA CONSTANTE
     def calculo():
-        f=fuerzaIn.get()
-        a=anguloIn.get()
-        aRad=math.radians(float(a))
-        d=distanciaIn.get()
-        r=round(float(f)*float(d)*math.cos(aRad),2) #round(numero,decimales)
+        try:
+            f=float(fuerzaIn.get())
+            a=float(anguloIn.get())
+            d=float(distanciaIn.get())
+
+            #VALIDACION DE DISTANCIA
+            if d < 0:
+                messagebox.showerror("Error", "La distancia no puede ser negativa")
+                return
+
+            aRad=math.radians(float(a))
+            r=round(float(f)*float(d)*math.cos(aRad),2) #round(numero,decimales)
+            
+            datos[0].append(f)
+            datos[1].append(a)
+            datos[2].append(d)
+            datos[3].append(r)
+            
+            resultadoIn.config(state="normal")
+            resultadoIn.delete(0,"end")
+            resultadoIn.insert(0,r)
+            resultadoIn.config(state="readonly")
         
-        datos[0].append(f)
-        datos[1].append(a)
-        datos[2].append(d)
-        datos[3].append(r)
-        
-        resultadoIn.config(state="normal")
-        resultadoIn.delete(0,"end")
-        resultadoIn.insert(0,r)
-        resultadoIn.config(state="readonly")
+        except ValueError:
+
+            #SI INGRESA DATOS INVALIDOS
+            messagebox.showerror("Error", "Vuelve a ingresar los datos")
         
     def mostrarDatos():
         vDat=Tk()
