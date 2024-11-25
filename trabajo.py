@@ -39,21 +39,21 @@ def salir():
 def teoriaTrabajo():
     teoria = Tk()
     teoria.title("Teoria")
-    teoria.geometry("220x320+670+200")
+    teoria.geometry("280x300+670+200")
     teoria.resizable(0,0)
     teoria.config(bg = "#b0c2f2")
     frameBtn=Frame(teoria, bg="#b0c2f2")
     frameBtn.grid()
     
-    tituloTeoria = Label(frameBtn, text ="\n  BIENVENIDO AL APARTADO DE TEORIA  \n", bg = "#b0c2f2")
+    tituloTeoria = Label(frameBtn, text ="\n  BIENVENIDO A TEORIA  ", bg = "#b0c2f2", fg = "#ffffff", font=("Impact", 20, "bold"))
     tituloTeoria.grid(row=0,column=0,pady=10)
-    btn1=Button(frameBtn, text="Ver teoria en linea\n" ,bg = "#6578a3", fg = "#ffffff")
+    btn1=Button(frameBtn, text="Ver teoria en linea" ,bg = "#6578a3", fg = "#ffffff", font=("Arial", 10, "bold"))
     btn1.grid(row=1,column=0,pady=10)
-    btn1=Button(frameBtn, text="Descargar teoria\n",bg = "#6578a3", fg = "#ffffff")
+    btn1=Button(frameBtn, text="Descargar teoria",bg = "#6578a3", fg = "#ffffff", font=("Arial", 10, "bold"))
     btn1.grid(row=2,column=0,pady=10)
-    btn1=Button(frameBtn, text="Ver teoria de forma local\n",bg = "#6578a3", fg = "#ffffff")
+    btn1=Button(frameBtn, text="Ver teoria de forma local",bg = "#6578a3", fg = "#ffffff", font=("Arial", 10, "bold"))
     btn1.grid(row=3,column=0,pady=10)
-    btn1=Button(frameBtn, text="Ver libros\n",bg = "#6578a3", fg = "#ffffff")
+    btn1=Button(frameBtn, text="Ver libros",bg = "#6578a3", fg = "#ffffff", font=("Arial", 10, "bold"))
     btn1.grid(row=4,column=0,pady=10)
 
 
@@ -183,7 +183,8 @@ def trabajoC():
 def potencia():
     vP=Tk()
     vP.title("Potencia")
-    vP.geometry("300x200+750+400")
+    vP.geometry("280x150+750+400")
+    vP.resizable(0,0)
 
     #FUNCION PARA CALCULAR POTENCIA
     def calculoPotencia():
@@ -211,8 +212,8 @@ def potencia():
     def mostrarDatosPotencia():
         vDat=Tk()
         vDat.title("Datos")
-        vDat.geometry("550x400+100+300")
-        
+        vDat.geometry("410x400+100+300")
+        vDat.resizable(0,0)
         #Labels
         fLbl=Label(vDat, text="Trabajo", bg="yellow", width=14, height=1)
         fLbl.grid(row=0,column=0, padx=10, pady=5)
@@ -265,7 +266,7 @@ def potencia():
     resultadoPotenciaIn.grid(row=2,column=1)
     
     mostrarBtn=Button(vP, text="Mostrar Datos", command=mostrarDatosPotencia)
-    mostrarBtn.grid(row=3,column=1, pady=30)
+    mostrarBtn.grid(row=3,column=1, pady=10)
 
 #BOTONES MENU PRINCIPAL
 #frame de botones
