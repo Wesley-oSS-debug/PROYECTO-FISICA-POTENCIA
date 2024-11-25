@@ -22,10 +22,10 @@ raiz.iconbitmap("work.ico")
 raiz.title("TRABAJO")
 raiz.geometry("400x600+750+200")
 raiz.resizable("False","False")
-raiz.config(bg="#ffecbd")
+raiz.config(bg="#350b4b")
 mainImage=PhotoImage(file="work.png")
 #frame de la imagen
-frameImg=Frame(raiz,bg="#ffecbd")
+frameImg=Frame(raiz,bg="#350b4b")
 frameImg.grid(row=0,column=0,pady=40)
 imgLbl=Label(frameImg,image=mainImage)
 imgLbl.grid(row=0,column=0,padx=73)
@@ -270,7 +270,7 @@ def potencia():
 
 #BOTONES MENU PRINCIPAL
 #frame de botones
-frameBtn=Frame(raiz, bg="#ffecbd")
+frameBtn=Frame(raiz, bg="#350b4b")
 frameBtn.grid()
 btn1=Button(frameBtn, text="Teoria de TRABAJO", command = teoriaTrabajo)
 btn1.grid(row=1,column=0,pady=10)
