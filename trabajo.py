@@ -52,6 +52,10 @@ def trabajoC():
         resultadoIn.config(state="readonly")
         
     def mostrarDatos():
+        if len(datos[0])==0:
+            messagebox.showerror("ERROR","No hay datos para visualizar")
+            messagebox.config(padx=-100)
+            return;
         vDat=Tk()
         vDat.title("Datos")
         vDat.geometry("550x400+100+300")
@@ -98,7 +102,7 @@ def trabajoC():
     #LABEL,ENTRY Y BOTONES
     
     frameEnt=Frame(vTF)
-    frameEnt.grid(padx=10)
+    frameEnt.grid(padx=10,pady=15)
     
     fuerzaLbl=Label(frameEnt, text="Fuerza:")
     fuerzaLbl.grid(row=0,column=0, sticky="nsew", padx=10, pady=5)
@@ -128,7 +132,7 @@ def trabajoC():
     resultadoIn.grid(row=3,column=1)
     
     mostrarBtn=Button(frameEnt, text="Mostrar Datos", command=mostrarDatos)
-    mostrarBtn.grid(row=4,column=1, pady=30)
+    mostrarBtn.grid(row=4,column=1, pady=20)
 
 #BOTONES MENU PRINCIPAL
 #frame de botones
