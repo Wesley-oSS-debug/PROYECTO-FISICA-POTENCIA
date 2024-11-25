@@ -29,22 +29,19 @@ def trabajoC():
     distancia=[]
     trabajo=[]
     datos=[fuerza,angulo,distancia,trabajo]
-    Dactual=0 #datos actualmente
+    
     #FUNCION QUE CALCULA EL TRABAJO DE UNA FUERZA CONSTANTE
     def calculo():
         f=fuerzaIn.get()
         a=anguloIn.get()
         aRad=math.radians(float(a))
         d=distanciaIn.get()
-        r=float(f)*float(d)*math.cos(aRad)
+        r=round(float(f)*float(d)*math.cos(aRad),2) #round(numero,decimales)
         
         datos[0].append(f)
         datos[1].append(a)
         datos[2].append(d)
         datos[3].append(r)
-        
-        nonlocal Dactual
-        Dactual+=1
         
         resultadoIn.config(state="normal")
         resultadoIn.delete(0,"end")
@@ -71,12 +68,13 @@ def trabajoC():
         
         #Entrys
         
-        for i in range(Dactual):
+        for i in range(len(datos[0])): #solo es necesario la longitud de un subarreglo
+            
             fIn=Entry(vDat, justify="center")
             fIn.grid(row=i+1,column=0,padx=10)
             fIn.insert(0,datos[0][i])
             fIn.config(state="readonly")
-            
+
             aIn=Entry(vDat,justify="center")
             aIn.grid(row=i+1,column=1)
             aIn.insert(0,datos[1][i])
