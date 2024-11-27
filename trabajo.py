@@ -117,6 +117,9 @@ def trabajoV():
         datosTFV[1].append(limIn)
         datosTFV[2].append(limSup)
         
+        plt.gcf().canvas.manager.set_window_title("Fuerza vs Posicion")
+        plt.get_current_fig_manager().window.geometry("+50+200") 
+
         x=np.linspace(limIn,limSup,500)
         y=eval(ecua)
         
@@ -132,12 +135,17 @@ def trabajoV():
         resultadoIn.delete(0,"end")
         resultadoIn.insert(0,t)
         resultadoIn.config(state="readonly")
-        plt.fill_between(x,y,alpha=0.5)
+        
+        plt.plot(x,y, color="red", label="f(x)")
+        plt.fill_between(x,y,color="purple",alpha=0.5, label="Trabajo")
+        plt.legend()
+        plt.xlabel("Posicion (m)")
+        plt.ylabel("Fuerza (N)")
         plt.xlim(minX,maxX)
-        plt.ylim(minY,maxY)
-        plt.plot(x,y)
+        plt.ylim(minY-0.05,maxY+0.05)
         plt.grid()
         plt.show()
+        
     def mostrarDatos():
         if len(datosTFV[0])==0:
             messagebox.showerror("ERROR","No hay datos para visualizar")
