@@ -1,9 +1,17 @@
 from tkinter import *
 from tkinter import messagebox
 import math
-import webbrowser 
+import webbrowser
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.integrate import trapezoid
 #ARREGLOS
-
+#arreglos de trabajo de fuerza variable
+ecuacion=[]
+limiteInf=[]
+limiteSup=[]
+trabajoV=[]
+datosTFV=[ecuacion,limiteInf,limiteSup,trabajoV]
 #arreglos de trabajo fuerza constante
 fuerza=[]
 angulo=[]
@@ -90,7 +98,141 @@ def teoriaTrabajo():
     btn1.grid(row=3,column=0,pady=10)
     btn1=Button(frameBtn, text="Descargar libro de fisica",bg = "#48C9B0", fg = "#ffffff", font=("Arial", 10, "bold"), command= descargarLibro)
     btn1.grid(row=4,column=0,pady=10)
+#VENTANA DE LA OPCION TRABAJO VARIABLE
+def trabajoV():
+    def calculo():
+        def procesar_funcion(equacion):
+            funciones = ["sin", "cos", "tan", "exp", "log", "sqrt"]
+            for func in funciones:
+                equacion = equacion.replace(func, f"np.{func}")
+            return equacion
+        
+        ecua=ecuacionIn.get()
+        datosTFV[0].append(ecua)
+        ecua=procesar_funcion(ecua)
+        
+        limIn=float(limiteInfIn.get())
+        limSup=float(limiteSupIn.get())
+        
+        datosTFV[1].append(limIn)
+        datosTFV[2].append(limSup)
+        
+        x=np.linspace(limIn,limSup,500)
+        y=eval(ecua)
+        
+        minX=min(x)
+        maxX=max(x)
+        minY=min(y)
+        maxY=max(y)
+        
+        t=round(trapezoid(y,x),3)
+        datosTFV[3].append(t)
+            
+        resultadoIn.config(state="normal")
+        resultadoIn.delete(0,"end")
+        resultadoIn.insert(0,t)
+        resultadoIn.config(state="readonly")
+        plt.fill_between(x,y,alpha=0.5)
+        plt.xlim(minX,maxX)
+        plt.ylim(minY,maxY)
+        plt.plot(x,y)
+        plt.grid()
+        plt.show()
+    def mostrarDatos():
+        if len(datosTFV[0])==0:
+            messagebox.showerror("ERROR","No hay datos para visualizar")
+            vTV.destroy()
+            return;
+        vDat=Tk()
+        vDat.title("Datos")
+        vDat.geometry("590x400+100+300")
+        vDat.resizable(0,0)
+        vDat.config( bg= "#F4D03F")
+        frameLista=Frame(vDat, bg= "#F4D03F")
+        frameLista.grid(padx=2)
+        #Labels
+        tituloHistorial=Label(frameLista, text="HISTORIAL DE TRABAJO", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
+        tituloHistorial.grid(row=0, column=0, columnspan=4, pady=10, sticky="nsew")
 
+
+        fLbl=Label(frameLista, text="Ecuacion", bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+        fLbl.grid(row=1,column=0, padx=10, pady=5)
+        
+        aLbl=Label(frameLista, text="Lim. Inferior",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+        aLbl.grid(row=1,column=1, padx=10, pady=5)
+        
+        dLbl=Label(frameLista, text="Lim. Superior",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+        dLbl.grid(row=1,column=2, padx=10,pady=5)
+        
+        tLbl=Label(frameLista,text="Trabajo",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+        tLbl.grid(row=1,column=3, padx=10, pady=5)
+        
+        #Entrys
+        
+        for i in range(len(datosTFV[0])): #solo es necesario la longitud de un subarreglo
+            
+            fIn=Entry(frameLista, justify="center")
+            fIn.grid(row=i+2,column=0,padx=10)
+            fIn.insert(0,datosTFV[0][i])
+            fIn.config(state="readonly")
+
+            aIn=Entry(frameLista,justify="center")
+            aIn.grid(row=i+2,column=1)
+            aIn.insert(0,datosTFV[1][i])
+            aIn.config(state="readonly")
+            
+            dIn=Entry(frameLista,justify="center")
+            dIn.grid(row=i+2,column=2, padx=10)
+            dIn.insert(0,datosTFV[2][i])
+            dIn.config(state="readonly")
+            
+            tIn=Entry(frameLista,justify="center")
+            tIn.grid(row=i+2,column=3)
+            tIn.insert(0,datosTFV[3][i])
+            tIn.config(state="readonly")
+    vTV=Tk()
+    vTV.title("Fuerza variable")
+    vTV.geometry("330x300+750+400")
+    vTV.resizable(0,0)
+    vTV.config(bg="#F4D03F")
+    #Label, entry y botones
+    frameT1=Frame(vTV,bg="#F4D03F")
+    frameT1.grid()
+    tituloLbl=Label(frameT1, text="TRABAJO DE UNA \nFUERTA VARIABLE", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
+    tituloLbl.grid(row=0, column=0, columnspan=4, pady=5, sticky="nsew")
+    
+    ecuacionLbl=Label(frameT1, text="Ecuacion:",bg= "#F4D03F" ,fg = "#ffffff", font=("Arial",11,"bold"))
+    ecuacionLbl.grid(row=1,column=0, sticky="nsew", padx=10, pady=5)
+    
+    ecuacionIn=Entry(frameT1, justify="center")
+    ecuacionIn.grid(row=1,column=1)
+    
+    limiteInfLbl=Label(frameT1, text="Limite inferior:",bg= "#F4D03F",fg = "#ffffff", font=("Arial",11,"bold"))
+    limiteInfLbl.grid(row=2,column=0, sticky="nsew", padx=10, pady=5)
+    
+    limiteInfIn=Entry(frameT1,justify="center")
+    limiteInfIn.grid(row=2,column=1)
+    
+    limiteSupLbl=Label(frameT1, text="Limite superior:",bg= "#F4D03F",fg = "#ffffff", font=("Arial",11,"bold"))
+    limiteSupLbl.grid(row=3,column=0, sticky="nsew", padx=10,pady=5)
+    
+    limiteSupIn=Entry(frameT1,justify="center")
+    limiteSupIn.grid(row=3,column=1)
+    
+    btn=Button(frameT1, text="Calcular", command=calculo)
+    btn.grid(row=2,column=2, padx=10)
+    
+    resultadoLbl=Label(frameT1,text="Trabajo:",bg= "#F4D03F",fg = "#ffffff", font=("Arial",11,"bold"))
+    resultadoLbl.grid(row=4,column=0,sticky="nsew", padx=10, pady=5)
+    
+    resultadoIn=Entry(frameT1, readonlybackground="#ffffff",state="readonly",justify="center")
+    resultadoIn.grid(row=4,column=1)
+    
+    mostrarBtn=Button(frameT1, text="Mostrar Datos", command=mostrarDatos)
+    mostrarBtn.grid(row=5,column=1, pady=20)
+    
+    
+    
 #VENTANA DE LA OPCION TRABAJO CONSTANTE
 def trabajoC():
     vTF=Tk()
@@ -331,7 +473,7 @@ btn1.grid(row=1,column=0,pady=10)
 btn2=Button(frameBtn, text="Calcular Trabajo de una fuerza constante", command=trabajoC)
 btn2.grid(row=2,column=0,pady=10)
 
-btn3=Button(frameBtn, text="Calcular Trabajo de una fuerza variable")
+btn3=Button(frameBtn, text="Calcular Trabajo de una fuerza variable", command=trabajoV)
 btn3.grid(row=3,column=0,pady=10)
 
 btn4=Button(frameBtn, text="Calcular Potencia", command=potencia)
