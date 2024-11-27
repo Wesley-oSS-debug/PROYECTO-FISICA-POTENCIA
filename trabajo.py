@@ -24,6 +24,13 @@ tiempo=[]
 potencia=[]
 datosPot=[trabajoPotencia, tiempo, potencia]
 
+#arreglos de trabajo del resorte
+constante=[]
+xInicial=[]
+xFinal=[]
+trabajoR=[]
+datosResorte = [constante, xInicial, xFinal, trabajoR]
+
 #CONFIGURACIONES VENTANA PRINCIPAL
 raiz=Tk()
 raiz.iconbitmap("work.ico")
@@ -470,6 +477,131 @@ def potencia():
     
     mostrarBtn=Button(vP, text="Mostrar Datos", command=mostrarDatosPotencia)
     mostrarBtn.grid(row=4,column=1, pady=10)
+    
+#VENTANA DE LA OPCION TRABAJO DE RESORTE
+def trabajoR():
+    vR = Tk()
+    vR.iconbitmap("work.ico")
+    vR.title("Trabajo Resorte")
+    vR.geometry("330x300+750+400")
+    vR.resizable(0, 0)
+    vR.config(bg="#F4D03F")
+
+
+    #FUNCION PARA CALCULAR TRABAJO DEL RESORTE
+    def calculoResorte():
+        try:
+
+            k = float(constanteIn.get())
+            xi = float(xInicialIn.get())
+            xf = float(xFinalIn.get())
+            if k <= 0:
+                messagebox.showerror("Error", "La constante no puede ser negativa")
+                return
+            w=round(0.5 * k *( xf**2 - xi**2), 4)
+            datosResorte[0].append(k)
+            datosResorte[1].append(xi)
+            datosResorte[2].append(xf)
+            datosResorte[3].append(w)
+
+            resultadoTrabajoIn.config(state="normal")
+            resultadoTrabajoIn.delete(0,"end")
+            resultadoTrabajoIn.insert(0,w)
+            resultadoTrabajoIn.config(state="readonly")
+        
+        except ValueError:
+            #SI INGRESA DATOS INVALIDOS
+            messagebox.showerror("Error", "Vuelve a ingresar los datos")
+    
+    def mostrarDatosResorte():
+        if len(datosResorte[0])==0:
+            messagebox.showerror("ERROR","No hay datos para visualizar")
+            vR.destroy()
+            return;
+        vDat=Tk()
+        vDat.title("Datos")
+        vDat.geometry("590x400+100+300")
+        vDat.config(bg= "#F4D03F")
+        vDat.resizable(0,0)
+        frameLista=Frame(vDat, bg= "#F4D03F")
+        frameLista.grid(padx=2)
+        #Labels
+        tituloHistorialResorte = Label(frameLista, text=" HISTORIAL DE TRABAJO", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
+        tituloHistorialResorte.grid(row=0, column=0, columnspan=4, pady=5, sticky="nsew")
+
+        fLbl=Label(frameLista, text="Constante", bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+        fLbl.grid(row=1,column=0, padx=10, pady=5)
+        
+        aLbl=Label(frameLista, text="x inicial",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+        aLbl.grid(row=1,column=1, padx=10, pady=5)
+        
+        dLbl=Label(frameLista, text="x final",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+        dLbl.grid(row=1,column=2, padx=10,pady=5)
+
+        tLbl=Label(frameLista, text="Trabajo",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+        tLbl.grid(row=1,column=3, padx=10,pady=5)
+
+        
+        #Entrys
+        
+        for i in range(len(datosResorte[0])): #solo es necesario la longitud de un subarreglo
+            
+            fIn=Entry(frameLista, justify="center")
+            fIn.grid(row=i+2,column=0,padx=10)
+            fIn.insert(0,datosResorte[0][i])
+            fIn.config(state="readonly")
+
+            aIn=Entry(frameLista,justify="center")
+            aIn.grid(row=i+2,column=1)
+            aIn.insert(0,datosResorte[1][i])
+            aIn.config(state="readonly")
+            
+            dIn=Entry(frameLista,justify="center")
+            dIn.grid(row=i+2,column=2, padx=10)
+            dIn.insert(0,datosResorte[2][i])
+            dIn.config(state="readonly")
+
+            tIn=Entry(frameLista,justify="center")
+            tIn.grid(row=i+2,column=3, padx=10)
+            tIn.insert(0,datosResorte[3][i])
+            tIn.config(state="readonly")
+
+    #LABEL,ENTRY Y BOTONES
+    frameEnt=Frame(vR, bg= "#F4D03F")
+    frameEnt.grid(padx=10,pady=5)
+
+    tituloHistorialResorte = Label(frameEnt, text="TRABAJO DE UN RESORTE", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
+    tituloHistorialResorte.grid(row=0, column=0, columnspan=4, pady=5, sticky="nsew")
+
+    constanteLbl=Label(frameEnt, text="Constante:",bg="#F4D03F", fg="#ffffff", font=("Arial", 11, "bold"))
+    constanteLbl.grid(row=1,column=0, sticky="nsew", padx=10, pady=5)
+    
+    constanteIn=Entry(frameEnt, justify="center")
+    constanteIn.grid(row=1,column=1)
+    
+    xInicialLbl=Label(frameEnt, text="x Inicial:", bg="#F4D03F", fg="#ffffff", font=("Arial", 11, "bold"))
+    xInicialLbl.grid(row=2,column=0, sticky="nsew", padx=10, pady=5)
+    
+    xInicialIn=Entry(frameEnt,justify="center")
+    xInicialIn.grid(row=2,column=1)
+
+    xFinalLbl=Label(frameEnt, text="x final:", bg="#F4D03F", fg="#ffffff", font=("Arial", 11, "bold"))
+    xFinalLbl.grid(row=3,column=0, sticky="nsew", padx=10, pady=5)
+    
+    xFinalIn=Entry(frameEnt,justify="center")
+    xFinalIn.grid(row=3,column=1)
+    
+    btn=Button(frameEnt, text="Calcular", command=calculoResorte)
+    btn.grid(row=3,column=2, padx=10)
+    
+    resultadoTrabajoLbl=Label(frameEnt,text="Resultado:", bg="#F4D03F", fg="#ffffff", font=("Arial", 11, "bold"))
+    resultadoTrabajoLbl.grid(row=5,column=0, padx=10, pady=5,sticky="nsew")
+    
+    resultadoTrabajoIn=Entry(frameEnt, readonlybackground="#ffffff",state="readonly",justify="center")
+    resultadoTrabajoIn.grid(row=5,column=1)
+    
+    mostrarBtn=Button(frameEnt, text="Mostrar Datos", command=mostrarDatosResorte)
+    mostrarBtn.grid(row=6,column=1, pady=10)    
 
 #BOTONES MENU PRINCIPAL
 #frame de botones
@@ -487,8 +619,11 @@ btn3.grid(row=3,column=0,pady=10)
 btn4=Button(frameBtn, text="Calcular Potencia", command=potencia)
 btn4.grid(row=4,column=0,pady=10)
 
+btn5=Button(frameBtn, text="Calcular Trabajo de Resorte", command=trabajoR)
+btn5.grid(row=5,column=0,pady=10)
+
 btn0=Button(frameBtn, text="Salir del programa", fg="red", command=salir)
-btn0.grid(row=5,column=0,pady=10)
+btn0.grid(row=6,column=0,pady=10)
 
 
 raiz.mainloop()
