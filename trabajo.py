@@ -108,6 +108,9 @@ def teoriaTrabajo():
 #VENTANA DE LA OPCION TRABAJO VARIABLE
 def trabajoV():
     def calculo():
+        def f(x):
+            return eval(ecua)
+        
         def procesar_funcion(equacion):
             funciones = ["sin", "cos", "tan", "exp", "log", "sqrt"]
             for func in funciones:
@@ -124,16 +127,11 @@ def trabajoV():
         datosTFV[1].append(limIn)
         datosTFV[2].append(limSup)
         
-        plt.gcf().canvas.manager.set_window_title("Fuerza vs Posicion")
-        plt.get_current_fig_manager().window.geometry("+50+200") 
+        x_plot=np.linspace(-2*limSup,2*limSup,500)
+        y_plot=f(x_plot)
 
-        x=np.linspace(limIn,limSup,500)
-        y=eval(ecua)
-        
-        minX=min(x)
-        maxX=max(x)
-        minY=min(y)
-        maxY=max(y)
+        x=np.linspace(limIn,limSup,200)
+        y=f(x)
         
         t=round(trapezoid(y,x),3)
         datosTFV[3].append(t)
@@ -143,14 +141,20 @@ def trabajoV():
         resultadoIn.insert(0,t)
         resultadoIn.config(state="readonly")
         
-        plt.plot(x,y, color="red", label="f(x)")
+        plt.gcf().canvas.manager.set_window_title("Fuerza vs Posicion")
+        plt.get_current_fig_manager().window.geometry("+60+240") 
+        
+        plt.axhline(0, color='black', linewidth=1)  # Eje X
+        plt.axvline(0, color='black', linewidth=1)  # Eje Y
+        
+        plt.title("Fuerza vs Posicion")
+        plt.axis([-2*limSup,2*limSup,-3*limSup,3*limSup])
+        plt.plot(x_plot,y_plot, color="red", label="f(x)")
         plt.fill_between(x,y,color="purple",alpha=0.5, label="Trabajo")
         plt.legend()
         plt.xlabel("Posicion (m)")
         plt.ylabel("Fuerza (N)")
-        plt.xlim(minX,maxX)
-        plt.ylim(minY-0.05,maxY+0.05)
-        plt.grid()
+        plt.grid(alpha=0.3)
         plt.show()
         
     def mostrarDatos():
