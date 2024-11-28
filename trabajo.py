@@ -55,7 +55,7 @@ def salir():
 
 #VENTANA DE TEORIA DE TRABAJO
 def teoriaTrabajo():
-    teoria = Tk()
+    teoria = Toplevel(raiz)
     teoria.title("Teoria")
     teoria.iconbitmap("work.ico")
     teoria.geometry("280x300+670+200")
@@ -158,7 +158,7 @@ def trabajoV():
             messagebox.showerror("ERROR","No hay datos para visualizar")
             vTV.destroy()
             return;
-        vDat=Tk()
+        vDat=Toplevel(vTV)
         vDat.title("Datos")
         vDat.geometry("590x400+100+300")
         vDat.resizable(0,0)
@@ -205,7 +205,7 @@ def trabajoV():
             tIn.grid(row=i+2,column=3)
             tIn.insert(0,datosTFV[3][i])
             tIn.config(state="readonly")
-    vTV=Tk()
+    vTV=Toplevel(raiz)
     vTV.title("Fuerza variable")
     vTV.geometry("330x300+750+400")
     vTV.resizable(0,0)
@@ -250,7 +250,7 @@ def trabajoV():
     
 #VENTANA DE LA OPCION TRABAJO CONSTANTE
 def trabajoC():
-    vTF=Tk()
+    vTF=Toplevel(raiz)
     vTF.iconbitmap("work.ico")
     vTF.title("Fuerza constante")
     vTF.geometry("330x300+750+400")     
@@ -291,7 +291,7 @@ def trabajoC():
             messagebox.showerror("ERROR","No hay datos para visualizar")
             vTF.destroy()
             return;
-        vDat=Tk()
+        vDat=Toplevel(vTF)
         vDat.title("Datos")
         vDat.geometry("590x400+100+300")
         vDat.resizable(0,0)
@@ -381,7 +381,7 @@ def trabajoC():
 
 #VENTANA DE LA OPCION POTENCIA
 def potencia():
-    vP=Tk()
+    vP=Toplevel(raiz)
     vP.iconbitmap("work.ico")
     vP.title("Potencia")
     vP.geometry("310x200+750+400")
@@ -412,7 +412,7 @@ def potencia():
             messagebox.showerror("Error", "Vuelve a ingresar los datos")
     
     def mostrarDatosPotencia():
-        vDat=Tk()
+        vDat=Toplevel(vP)
         vDat.title("Datos")
         vDat.geometry("440x400+100+300")
         vDat.config(bg= "#F4D03F")
@@ -480,7 +480,7 @@ def potencia():
     
 #VENTANA DE LA OPCION TRABAJO DE RESORTE
 def trabajoR():
-    vR = Tk()
+    vR = Toplevel(raiz)
     vR.iconbitmap("work.ico")
     vR.title("Trabajo Resorte")
     vR.geometry("330x300+750+400")
@@ -518,7 +518,7 @@ def trabajoR():
             messagebox.showerror("ERROR","No hay datos para visualizar")
             vR.destroy()
             return;
-        vDat=Tk()
+        vDat=Toplevel(vR)
         vDat.title("Datos")
         vDat.geometry("590x400+100+300")
         vDat.config(bg= "#F4D03F")
