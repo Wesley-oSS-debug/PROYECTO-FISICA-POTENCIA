@@ -45,7 +45,7 @@ titulo.grid(row=1,column=0,pady=10)
 #frame de la imagen
 frameImg=Frame(raiz,bg="#350b4b")
 frameImg.grid(row=0,column=0,pady=12)
-imgLbl=Label(frameImg,image=mainImage)
+imgLbl=Label(frameImg,image=mainImage,bg="#350b4b")
 imgLbl.grid(row=0,column=0,padx=73)
 
 def salir():
