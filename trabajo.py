@@ -107,7 +107,62 @@ def teoriaTrabajo():
     btn1.grid(row=4,column=0,pady=10)
 #VENTANA DE LA OPCION TRABAJO VARIABLE
 def trabajoV():
+
+    vTV=Toplevel(raiz)
+    
+    def escenaPrincipal():
+        vTV.title("Fuerza variable")
+        vTV.geometry("330x300+750+400")
+        vTV.resizable(0,0)
+        vTV.config(bg="#F4D03F")
+        
+        
+        frameLista.grid_forget()
+        frameT1.grid()
+        
+        
+        
+    def mostrarDatos():
+        if len(datosTFV[0])==0:
+            messagebox.showerror("ERROR","No hay datos para visualizar")
+            vTV.destroy()
+            return
+        
+        vTV.title("Datos")
+        vTV.geometry("590x400+100+300")
+        vTV.resizable(0,0)
+        vTV.config(bg= "#F4D03F")
+        
+        frameT1.grid_forget()
+        frameLista.grid(padx=2)
+        volverBtn.grid(row=len(datosTFV[0])+2,column=3, pady=20)
+        
+        #Entrys
+        
+        for i in range(len(datosTFV[0])): #solo es necesario la longitud de un subarreglo
+            
+            fIn=Entry(frameLista, justify="center")
+            fIn.grid(row=i+2,column=0,padx=10)
+            fIn.insert(0,datosTFV[0][i])
+            fIn.config(state="readonly")
+
+            aIn=Entry(frameLista,justify="center")
+            aIn.grid(row=i+2,column=1)
+            aIn.insert(0,datosTFV[1][i])
+            aIn.config(state="readonly")
+            
+            dIn=Entry(frameLista,justify="center")
+            dIn.grid(row=i+2,column=2, padx=10)
+            dIn.insert(0,datosTFV[2][i])
+            dIn.config(state="readonly")
+            
+            tIn=Entry(frameLista,justify="center")
+            tIn.grid(row=i+2,column=3)
+            tIn.insert(0,datosTFV[3][i])
+            tIn.config(state="readonly")
+            
     def calculo():
+        
         def f(x):
             return eval(ecua)
         
@@ -156,67 +211,10 @@ def trabajoV():
         plt.ylabel("Fuerza (N)")
         plt.grid(alpha=0.3)
         plt.show()
-        
-    def mostrarDatos():
-        if len(datosTFV[0])==0:
-            messagebox.showerror("ERROR","No hay datos para visualizar")
-            vTV.destroy()
-            return;
-        vDat=Toplevel(vTV)
-        vDat.title("Datos")
-        vDat.geometry("590x400+100+300")
-        vDat.resizable(0,0)
-        vDat.config( bg= "#F4D03F")
-        frameLista=Frame(vDat, bg= "#F4D03F")
-        frameLista.grid(padx=2)
-        #Labels
-        tituloHistorial=Label(frameLista, text="HISTORIAL DE TRABAJO", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
-        tituloHistorial.grid(row=0, column=0, columnspan=4, pady=10, sticky="nsew")
-
-
-        fLbl=Label(frameLista, text="Ecuacion", bg="#7D3C98",fg= "#ffffff", width=17, height=1)
-        fLbl.grid(row=1,column=0, padx=10, pady=5)
-        
-        aLbl=Label(frameLista, text="Lim. Inferior",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
-        aLbl.grid(row=1,column=1, padx=10, pady=5)
-        
-        dLbl=Label(frameLista, text="Lim. Superior",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
-        dLbl.grid(row=1,column=2, padx=10,pady=5)
-        
-        tLbl=Label(frameLista,text="Trabajo",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
-        tLbl.grid(row=1,column=3, padx=10, pady=5)
-        
-        #Entrys
-        
-        for i in range(len(datosTFV[0])): #solo es necesario la longitud de un subarreglo
-            
-            fIn=Entry(frameLista, justify="center")
-            fIn.grid(row=i+2,column=0,padx=10)
-            fIn.insert(0,datosTFV[0][i])
-            fIn.config(state="readonly")
-
-            aIn=Entry(frameLista,justify="center")
-            aIn.grid(row=i+2,column=1)
-            aIn.insert(0,datosTFV[1][i])
-            aIn.config(state="readonly")
-            
-            dIn=Entry(frameLista,justify="center")
-            dIn.grid(row=i+2,column=2, padx=10)
-            dIn.insert(0,datosTFV[2][i])
-            dIn.config(state="readonly")
-            
-            tIn=Entry(frameLista,justify="center")
-            tIn.grid(row=i+2,column=3)
-            tIn.insert(0,datosTFV[3][i])
-            tIn.config(state="readonly")
-    vTV=Toplevel(raiz)
-    vTV.title("Fuerza variable")
-    vTV.geometry("330x300+750+400")
-    vTV.resizable(0,0)
-    vTV.config(bg="#F4D03F")
-    #Label, entry y botones
+    
+    #ESCENA PRINCIPAL-----------------------------------------------------------------------------------------
     frameT1=Frame(vTV,bg="#F4D03F")
-    frameT1.grid()
+    
     tituloLbl=Label(frameT1, text="TRABAJO DE UNA \nFUERTA VARIABLE", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
     tituloLbl.grid(row=0, column=0, columnspan=4, pady=5, sticky="nsew")
     
@@ -250,16 +248,83 @@ def trabajoV():
     mostrarBtn=Button(frameT1, text="Mostrar Datos", command=mostrarDatos)
     mostrarBtn.grid(row=5,column=1, pady=20)
     
+    #SEGUNDA ESCENA---------------------------------------------------------------------------------------------------
+    frameLista=Frame(vTV, bg= "#F4D03F")
+
+    tituloHistorial=Label(frameLista, text="HISTORIAL DE TRABAJO", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
+    tituloHistorial.grid(row=0, column=0, columnspan=4, pady=10, sticky="nsew")
+
+    fLbl=Label(frameLista, text="Ecuacion", bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+    fLbl.grid(row=1,column=0, padx=10, pady=5)
+        
+    aLbl=Label(frameLista, text="Lim. Inferior",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+    aLbl.grid(row=1,column=1, padx=10, pady=5)
+        
+    dLbl=Label(frameLista, text="Lim. Superior",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+    dLbl.grid(row=1,column=2, padx=10,pady=5)
+        
+    tLbl=Label(frameLista,text="Trabajo",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+    tLbl.grid(row=1,column=3, padx=10, pady=5)
+    
+    volverBtn=Button(frameLista, text="volver", command=escenaPrincipal)
+        
+    escenaPrincipal()
+    
+    
     
     
 #VENTANA DE LA OPCION TRABAJO CONSTANTE
 def trabajoC():
     vTF=Toplevel(raiz)
-    vTF.iconbitmap("work.ico")
-    vTF.title("Fuerza constante")
-    vTF.geometry("330x300+750+400")     
-    vTF.config( bg= "#F4D03F")
-    vTF.resizable(0,0)
+            
+    def escenaPrincipal():
+        vTF.iconbitmap("work.ico")
+        vTF.title("Fuerza constante")
+        vTF.geometry("330x300+780+400")     
+        vTF.config( bg= "#F4D03F")
+        vTF.resizable(0,0)
+    
+        frameLista.grid_forget()
+        frameEnt.grid(padx=10,pady=5)
+        
+    def mostrarDatos():
+        if len(datosTFC[0])==0:
+            messagebox.showerror("ERROR","No hay datos para visualizar")
+            vTF.destroy()
+            return
+        
+        for i in range(len(datosTFC[0])): #solo es necesario la longitud de un subarreglo
+            
+            fIn=Entry(frameLista, justify="center")
+            fIn.grid(row=i+2,column=0,padx=10)
+            fIn.insert(0,datosTFC[0][i])
+            fIn.config(state="readonly")
+            
+            aIn=Entry(frameLista,justify="center")
+            aIn.grid(row=i+2,column=1)
+            aIn.insert(0,datosTFC[1][i])
+            aIn.config(state="readonly")
+            
+            dIn=Entry(frameLista,justify="center")
+            dIn.grid(row=i+2,column=2, padx=10)
+            dIn.insert(0,datosTFC[2][i])
+            dIn.config(state="readonly")
+            
+            tIn=Entry(frameLista,justify="center")
+            tIn.grid(row=i+2,column=3)
+            tIn.insert(0,datosTFC[3][i])
+            tIn.config(state="readonly")
+            
+        
+        vTF.title("Datos")
+        vTF.geometry("590x400+650+350")
+        vTF.resizable(0,0)
+        vTF.config( bg= "#F4D03F")
+        
+        frameEnt.grid_forget()
+        frameLista.grid(padx=2)
+        volverBtn.grid(row=len(datosTFC[0])+2,column=3, pady=20)
+
     #FUNCION QUE CALCULA EL TRABAJO DE UNA FUERZA CONSTANTE
     def calculo():
         try:
@@ -289,68 +354,12 @@ def trabajoC():
         except ValueError:
             #SI INGRESA DATOS INVALIDOS
             messagebox.showerror("Error", "Vuelve a ingresar los datos")
-        
-    def mostrarDatos():
-        if len(datosTFC[0])==0:
-            messagebox.showerror("ERROR","No hay datos para visualizar")
-            vTF.destroy()
-            return;
-        vDat=Toplevel(vTF)
-        vDat.title("Datos")
-        vDat.geometry("590x400+100+300")
-        vDat.resizable(0,0)
-        vDat.config( bg= "#F4D03F")
-        frameLista=Frame(vDat, bg= "#F4D03F")
-        frameLista.grid(padx=2)
-        #Labels
-        tituloHistorial = Label(frameLista, text="HISTORIAL DE TRABAJO", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
-        tituloHistorial.grid(row=0, column=0, columnspan=4, pady=10, sticky="nsew")
-
-
-        fLbl=Label(frameLista, text="Fuerza", bg="#7D3C98",fg= "#ffffff", width=17, height=1)
-        fLbl.grid(row=1,column=0, padx=10, pady=5)
-        
-        aLbl=Label(frameLista, text="Angulo",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
-        aLbl.grid(row=1,column=1, padx=10, pady=5)
-        
-        dLbl=Label(frameLista, text="Distancia",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
-        dLbl.grid(row=1,column=2, padx=10,pady=5)
-        
-        tLbl=Label(frameLista,text="Trabajo",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
-        tLbl.grid(row=1,column=3, padx=10, pady=5)
-        
-        #Entrys
-        
-        for i in range(len(datosTFC[0])): #solo es necesario la longitud de un subarreglo
-            
-            fIn=Entry(frameLista, justify="center")
-            fIn.grid(row=i+2,column=0,padx=10)
-            fIn.insert(0,datosTFC[0][i])
-            fIn.config(state="readonly")
-
-            aIn=Entry(frameLista,justify="center")
-            aIn.grid(row=i+2,column=1)
-            aIn.insert(0,datosTFC[1][i])
-            aIn.config(state="readonly")
-            
-            dIn=Entry(frameLista,justify="center")
-            dIn.grid(row=i+2,column=2, padx=10)
-            dIn.insert(0,datosTFC[2][i])
-            dIn.config(state="readonly")
-            
-            tIn=Entry(frameLista,justify="center")
-            tIn.grid(row=i+2,column=3)
-            tIn.insert(0,datosTFC[3][i])
-            tIn.config(state="readonly")
-
-
 
     
-    #LABEL,ENTRY Y BOTONES
+    #PRIMERA ESCENA------------------------------------------------------------------------------------------
     frameEnt=Frame(vTF, bg= "#F4D03F")
-    frameEnt.grid(padx=10,pady=5)
     
-    tituloHistorial = Label(frameEnt, text="TRABAJO DE UNA \nFUERTA CONSTANTE", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
+    tituloHistorial = Label(frameEnt, text="TRABAJO DE UNA \nFUERZA CONSTANTE", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
     tituloHistorial.grid(row=0, column=0, columnspan=4, pady=5, sticky="nsew")
 
     fuerzaLbl=Label(frameEnt, text="Fuerza:",bg= "#F4D03F" ,fg = "#ffffff", font=("Arial",11,"bold"))
@@ -382,16 +391,76 @@ def trabajoC():
     
     mostrarBtn=Button(frameEnt, text="Mostrar Datos", command=mostrarDatos)
     mostrarBtn.grid(row=5,column=1, pady=20)
+    
+    #SEGUNDA ESCENA---------------------------------------------------------------------------------------------
+    frameLista=Frame(vTF, bg= "#F4D03F")
+
+    tituloHistorial = Label(frameLista, text="HISTORIAL DE TRABAJO", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
+    tituloHistorial.grid(row=0, column=0, columnspan=4, pady=10, sticky="nsew")
+
+
+    fLbl=Label(frameLista, text="Fuerza", bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+    fLbl.grid(row=1,column=0, padx=10, pady=5)
+        
+    aLbl=Label(frameLista, text="Angulo",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+    aLbl.grid(row=1,column=1, padx=10, pady=5)
+        
+    dLbl=Label(frameLista, text="Distancia",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+    dLbl.grid(row=1,column=2, padx=10,pady=5)
+        
+    tLbl=Label(frameLista,text="Trabajo",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+    tLbl.grid(row=1,column=3, padx=10, pady=5)
+    
+    volverBtn=Button(frameLista, text="volver", command=escenaPrincipal)
+        
+    escenaPrincipal()
 
 #VENTANA DE LA OPCION POTENCIA
 def potencia():
     vP=Toplevel(raiz)
-    vP.iconbitmap("work.ico")
-    vP.title("Potencia")
-    vP.geometry("310x200+750+400")
-    vP.resizable(0,0)
-    vP.config(bg="#F4D03F")
+    
+    def escenaPrincipal():
+        
+        vP.iconbitmap("work.ico")
+        vP.title("Potencia")
+        vP.geometry("320x210+790+440")
+        vP.resizable(0,0)
+        vP.config(bg="#F4D03F")
+        
+        frameLista.grid_forget()
+        frame1.grid(padx=10,pady=5)
+    
+    def mostrarDatosPotencia():
+        
+        vP.title("Datos")
+        vP.geometry("440x400+730+330")
+        vP.config(bg= "#F4D03F")
+        vP.resizable(0,0)
+        
+        frame1.grid_forget()
+        frameLista.grid(padx=2)
+        volverBtn.grid(row=len(datosPot[0])+2,column=2, pady=20)
+       
+        
+        #Entrys
+        
+        for i in range(len(datosPot[0])): #solo es necesario la longitud de un subarreglo
+            
+            fIn=Entry(frameLista, justify="center")
+            fIn.grid(row=i+2,column=0,padx=10)
+            fIn.insert(0,datosPot[0][i])
+            fIn.config(state="readonly")
 
+            aIn=Entry(frameLista,justify="center")
+            aIn.grid(row=i+2,column=1)
+            aIn.insert(0,datosPot[1][i])
+            aIn.config(state="readonly")
+            
+            dIn=Entry(frameLista,justify="center")
+            dIn.grid(row=i+2,column=2, padx=10)
+            dIn.insert(0,datosPot[2][i])
+            dIn.config(state="readonly")
+            
     #FUNCION PARA CALCULAR POTENCIA
     def calculoPotencia():
         try:
@@ -415,82 +484,107 @@ def potencia():
             #SI INGRESA DATOS INVALIDOS
             messagebox.showerror("Error", "Vuelve a ingresar los datos")
     
-    def mostrarDatosPotencia():
-        vDat=Toplevel(vP)
-        vDat.title("Datos")
-        vDat.geometry("440x400+100+300")
-        vDat.config(bg= "#F4D03F")
-        vDat.resizable(0,0)
-        #Labels
-        tituloHistorialPotencia = Label(vDat, text="HISTORIAL DE POTENCIA", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
-        tituloHistorialPotencia.grid(row=0, column=0, columnspan=4, pady=5, sticky="nsew")
+    
 
-        fLbl=Label(vDat, text="Trabajo", bg="#7D3C98",fg= "#ffffff", width=17, height=1)
-        fLbl.grid(row=1,column=0, padx=10, pady=5)
-        
-        aLbl=Label(vDat, text="Tiempo",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
-        aLbl.grid(row=1,column=1, padx=10, pady=5)
-        
-        dLbl=Label(vDat, text="Potencia",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
-        dLbl.grid(row=1,column=2, padx=10,pady=5)
-        
-        #Entrys
-        
-        for i in range(len(datosPot[0])): #solo es necesario la longitud de un subarreglo
-            
-            fIn=Entry(vDat, justify="center")
-            fIn.grid(row=i+2,column=0,padx=10)
-            fIn.insert(0,datosPot[0][i])
-            fIn.config(state="readonly")
-
-            aIn=Entry(vDat,justify="center")
-            aIn.grid(row=i+2,column=1)
-            aIn.insert(0,datosPot[1][i])
-            aIn.config(state="readonly")
-            
-            dIn=Entry(vDat,justify="center")
-            dIn.grid(row=i+2,column=2, padx=10)
-            dIn.insert(0,datosPot[2][i])
-            dIn.config(state="readonly")
-
-    #LABEL,ENTRY Y BOTONES
-
-    tituloPotencia = Label(vP, text="  POTENCIA", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
+    #ESCENA PRINCIPAL-------------------------------------------------------------------------------------------------------------
+    frame1=Frame(vP,bg="#F4D03F")
+    tituloPotencia = Label(frame1, text="  POTENCIA", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
     tituloPotencia.grid(row=0, column=0, columnspan=4, pady=5, sticky="nsew")
 
-    trabajoPotenciaLbl=Label(vP, text="Trabajo:",bg="#F4D03F", fg="#ffffff", font=("Arial", 11, "bold"))
+    trabajoPotenciaLbl=Label(frame1, text="Trabajo:",bg="#F4D03F", fg="#ffffff", font=("Arial", 11, "bold"))
     trabajoPotenciaLbl.grid(row=1,column=0, sticky="nsew", padx=10, pady=5)
     
-    trabajoPotenciaIn=Entry(vP, justify="center")
+    trabajoPotenciaIn=Entry(frame1, justify="center")
     trabajoPotenciaIn.grid(row=1,column=1)
     
-    tiempoLbl=Label(vP, text="Tiempo:", bg="#F4D03F", fg="#ffffff", font=("Arial", 11, "bold"))
+    tiempoLbl=Label(frame1, text="Tiempo:", bg="#F4D03F", fg="#ffffff", font=("Arial", 11, "bold"))
     tiempoLbl.grid(row=2,column=0, sticky="nsew", padx=10, pady=5)
     
-    tiempoIn=Entry(vP,justify="center")
+    tiempoIn=Entry(frame1,justify="center")
     tiempoIn.grid(row=2,column=1)
     
-    btn=Button(vP, text="Calcular", command=calculoPotencia)
+    btn=Button(frame1, text="Calcular", command=calculoPotencia)
     btn.grid(row=2,column=2, padx=10)
     
-    resultadoPotenciaLbl=Label(vP,text="Resultado:", bg="#F4D03F", fg="#ffffff", font=("Arial", 11, "bold"))
+    resultadoPotenciaLbl=Label(frame1,text="Resultado:", bg="#F4D03F", fg="#ffffff", font=("Arial", 11, "bold"))
     resultadoPotenciaLbl.grid(row=3,column=0, padx=10, pady=5,sticky="nsew")
     
-    resultadoPotenciaIn=Entry(vP, readonlybackground="#ffffff",state="readonly",justify="center")
+    resultadoPotenciaIn=Entry(frame1, readonlybackground="#ffffff",state="readonly",justify="center")
     resultadoPotenciaIn.grid(row=3,column=1)
     
-    mostrarBtn=Button(vP, text="Mostrar Datos", command=mostrarDatosPotencia)
+    mostrarBtn=Button(frame1, text="Mostrar Datos", command=mostrarDatosPotencia)
     mostrarBtn.grid(row=4,column=1, pady=10)
+    
+    #SEGUNDA ESCENA------------------------------------------------------------------------------------------------------
+    frameLista=Frame(vP,bg= "#F4D03F")
+    tituloHistorialPotencia = Label(frameLista, text="HISTORIAL DE POTENCIA", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
+    tituloHistorialPotencia.grid(row=0, column=0, columnspan=4, pady=5, sticky="nsew")
+
+    fLbl=Label(frameLista, text="Trabajo", bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+    fLbl.grid(row=1,column=0, padx=10, pady=5)
+        
+    aLbl=Label(frameLista, text="Tiempo",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+    aLbl.grid(row=1,column=1, padx=10, pady=5)
+        
+    dLbl=Label(frameLista, text="Potencia",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+    dLbl.grid(row=1,column=2, padx=10,pady=5)
+    
+    volverBtn=Button(frameLista, text="volver", command=escenaPrincipal)
+        
+    escenaPrincipal()
     
 #VENTANA DE LA OPCION TRABAJO DE RESORTE
 def trabajoR():
     vR = Toplevel(raiz)
-    vR.iconbitmap("work.ico")
-    vR.title("Trabajo Resorte")
-    vR.geometry("330x300+750+400")
-    vR.resizable(0, 0)
-    vR.config(bg="#F4D03F")
+    
+    def escenaPrincipal():
+        vR.iconbitmap("work.ico")
+        vR.title("Trabajo Resorte")
+        vR.geometry("330x300+780+400")
+        vR.resizable(0, 0)
+        vR.config(bg="#F4D03F")
+        
+        frameLista.grid_forget()
+        frameEnt.grid(padx=10,pady=5)
+        
+    
+    def mostrarDatosResorte():
+        if len(datosResorte[0])==0:
+            messagebox.showerror("ERROR","No hay datos para visualizar")
+            vR.destroy()
+            return
+        
+        vR.title("Datos")
+        vR.geometry("590x400+660+330")
+        vR.config(bg= "#F4D03F")
+        vR.resizable(0,0)
+        
+        frameEnt.grid_forget()
+        frameLista.grid(padx=2)
+        volverBtn.grid(row=len(datosResorte[0])+2,column=3, pady=20)
+        
+        for i in range(len(datosResorte[0])): #solo es necesario la longitud de un subarreglo
+            
+            fIn=Entry(frameLista, justify="center")
+            fIn.grid(row=i+2,column=0,padx=10)
+            fIn.insert(0,datosResorte[0][i])
+            fIn.config(state="readonly")
 
+            aIn=Entry(frameLista,justify="center")
+            aIn.grid(row=i+2,column=1)
+            aIn.insert(0,datosResorte[1][i])
+            aIn.config(state="readonly")
+            
+            dIn=Entry(frameLista,justify="center")
+            dIn.grid(row=i+2,column=2, padx=10)
+            dIn.insert(0,datosResorte[2][i])
+            dIn.config(state="readonly")
+
+            tIn=Entry(frameLista,justify="center")
+            tIn.grid(row=i+2,column=3, padx=10)
+            tIn.insert(0,datosResorte[3][i])
+            tIn.config(state="readonly")
+        
 
     #FUNCION PARA CALCULAR TRABAJO DEL RESORTE
     def calculoResorte():
@@ -516,63 +610,12 @@ def trabajoR():
         except ValueError:
             #SI INGRESA DATOS INVALIDOS
             messagebox.showerror("Error", "Vuelve a ingresar los datos")
-    
-    def mostrarDatosResorte():
-        if len(datosResorte[0])==0:
-            messagebox.showerror("ERROR","No hay datos para visualizar")
-            vR.destroy()
-            return;
-        vDat=Toplevel(vR)
-        vDat.title("Datos")
-        vDat.geometry("590x400+100+300")
-        vDat.config(bg= "#F4D03F")
-        vDat.resizable(0,0)
-        frameLista=Frame(vDat, bg= "#F4D03F")
-        frameLista.grid(padx=2)
-        #Labels
-        tituloHistorialResorte = Label(frameLista, text=" HISTORIAL DE TRABAJO", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
-        tituloHistorialResorte.grid(row=0, column=0, columnspan=4, pady=5, sticky="nsew")
-
-        fLbl=Label(frameLista, text="Constante", bg="#7D3C98",fg= "#ffffff", width=17, height=1)
-        fLbl.grid(row=1,column=0, padx=10, pady=5)
         
-        aLbl=Label(frameLista, text="x inicial",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
-        aLbl.grid(row=1,column=1, padx=10, pady=5)
         
-        dLbl=Label(frameLista, text="x final",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
-        dLbl.grid(row=1,column=2, padx=10,pady=5)
 
-        tLbl=Label(frameLista, text="Trabajo",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
-        tLbl.grid(row=1,column=3, padx=10,pady=5)
-
-        
-        #Entrys
-        
-        for i in range(len(datosResorte[0])): #solo es necesario la longitud de un subarreglo
-            
-            fIn=Entry(frameLista, justify="center")
-            fIn.grid(row=i+2,column=0,padx=10)
-            fIn.insert(0,datosResorte[0][i])
-            fIn.config(state="readonly")
-
-            aIn=Entry(frameLista,justify="center")
-            aIn.grid(row=i+2,column=1)
-            aIn.insert(0,datosResorte[1][i])
-            aIn.config(state="readonly")
-            
-            dIn=Entry(frameLista,justify="center")
-            dIn.grid(row=i+2,column=2, padx=10)
-            dIn.insert(0,datosResorte[2][i])
-            dIn.config(state="readonly")
-
-            tIn=Entry(frameLista,justify="center")
-            tIn.grid(row=i+2,column=3, padx=10)
-            tIn.insert(0,datosResorte[3][i])
-            tIn.config(state="readonly")
-
-    #LABEL,ENTRY Y BOTONES
+    #ESCENA PRINCIPAL-----------------------------------------------------------------------------------
     frameEnt=Frame(vR, bg= "#F4D03F")
-    frameEnt.grid(padx=10,pady=5)
+    
 
     tituloHistorialResorte = Label(frameEnt, text="TRABAJO DE UN RESORTE", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
     tituloHistorialResorte.grid(row=0, column=0, columnspan=4, pady=5, sticky="nsew")
@@ -605,7 +648,29 @@ def trabajoR():
     resultadoTrabajoIn.grid(row=5,column=1)
     
     mostrarBtn=Button(frameEnt, text="Mostrar Datos", command=mostrarDatosResorte)
-    mostrarBtn.grid(row=6,column=1, pady=10)    
+    mostrarBtn.grid(row=6,column=1, pady=10)   
+    
+    #SEGUNDA ESCENA-----------------------------------------------------------------------------------------------------
+    frameLista=Frame(vR, bg= "#F4D03F")
+    
+    tituloHistorialResorte = Label(frameLista, text=" HISTORIAL DE TRABAJO", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
+    tituloHistorialResorte.grid(row=0, column=0, columnspan=4, pady=5, sticky="nsew")
+
+    fLbl=Label(frameLista, text="Constante", bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+    fLbl.grid(row=1,column=0, padx=10, pady=5)
+        
+    aLbl=Label(frameLista, text="x inicial",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+    aLbl.grid(row=1,column=1, padx=10, pady=5)
+        
+    dLbl=Label(frameLista, text="x final",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+    dLbl.grid(row=1,column=2, padx=10,pady=5)
+
+    tLbl=Label(frameLista, text="Trabajo",bg="#7D3C98",fg= "#ffffff", width=17, height=1)
+    tLbl.grid(row=1,column=3, padx=10,pady=5)
+    
+    volverBtn=Button(frameLista, text="volver", command=escenaPrincipal)
+        
+    escenaPrincipal()
 
 #BOTONES MENU PRINCIPAL
 #frame de botones
