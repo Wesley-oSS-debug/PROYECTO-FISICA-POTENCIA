@@ -4,6 +4,7 @@ import math
 import webbrowser
 import matplotlib.pyplot as plt
 import numpy as np
+import ctypes
 from scipy.integrate import trapezoid
 #ARREGLOS
 #arreglos de trabajo de fuerza variable
@@ -35,9 +36,23 @@ datosResorte = [constante, xInicial, xFinal, trabajoR]
 raiz=Tk()
 raiz.iconbitmap("work.ico")
 raiz.title("TRABAJO")
-raiz.geometry("400x600+750+200")
-raiz.resizable("False","False")
 raiz.config(bg="#350b4b")
+raiz.resizable("False","False")
+
+#DIMENSIONES DE LA VENTANA
+ancho_ventana = 400
+alto_ventana = 630
+
+#OBTENER DIMENSIONES DE LA PANTALLA
+user32 = ctypes.windll.user32
+ancho_pantalla = user32.GetSystemMetrics(0)
+alto_pantalla = user32.GetSystemMetrics(1)
+
+#CALCULAR COORDENADAS PARA CENTRAR LA VENTANA
+x = (ancho_pantalla - ancho_ventana) // 2
+y = (alto_pantalla - alto_ventana) // 2
+
+raiz.geometry(f"{ancho_ventana}x{alto_ventana}+{x}+{y-30}")
 mainImage=PhotoImage(file="work.png")
 
 titulo= Label(raiz, text ="CALCULO DEL TRABAJO", bg = "#F4D03F", fg = "#ffffff", font=("Impact", 20, "bold"))
