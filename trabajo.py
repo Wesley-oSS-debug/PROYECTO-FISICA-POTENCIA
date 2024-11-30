@@ -432,6 +432,11 @@ def potencia():
     
     def mostrarDatosPotencia():
         
+        if len(datosTFV[0])==0:
+                messagebox.showerror("ERROR","No hay datos para visualizar")
+                vP.destroy()
+                return
+
         vP.title("Datos")
         vP.geometry("440x400+730+330")
         vP.config(bg= "#F4D03F")
@@ -464,7 +469,6 @@ def potencia():
     #FUNCION PARA CALCULAR POTENCIA
     def calculoPotencia():
         try:
-
             w=float(trabajoPotenciaIn.get())
             t=float(tiempoIn.get())
             if t < 0:
