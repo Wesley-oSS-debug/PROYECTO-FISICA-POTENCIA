@@ -447,7 +447,7 @@ def potencia():
     
     def mostrarDatosPotencia():
         
-        if len(datosTFV[0])==0:
+        if len(datosPot[0])==0:
                 messagebox.showerror("ERROR","No hay datos para visualizar")
                 vP.destroy()
                 return
