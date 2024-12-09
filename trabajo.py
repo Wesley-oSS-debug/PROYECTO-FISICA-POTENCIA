@@ -230,7 +230,7 @@ def trabajoV():
     #ESCENA PRINCIPAL-----------------------------------------------------------------------------------------
     frameT1=Frame(vTV,bg="#F4D03F")
     
-    tituloLbl=Label(frameT1, text="TRABAJO DE UNA \nFUERTA VARIABLE", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
+    tituloLbl=Label(frameT1, text="TRABAJO DE UNA \nFUERZA VARIABLE", bg="#F4D03F", fg="#ffffff", font=("Impact", 20, "bold"))
     tituloLbl.grid(row=0, column=0, columnspan=4, pady=5, sticky="nsew")
     
     ecuacionLbl=Label(frameT1, text="Ecuacion:",bg= "#F4D03F" ,fg = "#ffffff", font=("Arial",11,"bold"))
